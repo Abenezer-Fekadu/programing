@@ -1,16 +1,18 @@
 class Solution:
     def findWords(self, words: List[str]) -> List[str]:
         ans = []
-        rowF = "QqWwEeRrTtYyUuIiOoPp"
-        rowS = "AaSsDdFfGgHhJjKkLl"
-        rowT = "ZzXxCcVvBbNnMm"
+        rowF = "qwertyuiop"
+        rowS = "asdfghjkl"
+        rowT = "zxcvbnm"
 
         for word in words:
-            f = [word[i] in rowF for i in range(len(word))]
-            s = [word[i] in rowS for i in range(len(word))]
-            t = [word[i] in rowT for i in range(len(word))]
-
-            if all(f) or all(s) or all(t):
-                ans.append(word)
-
-        return (ans)
+            if word[0].lower() in rowF:
+                if all(x in rowF for x in word.lower()):
+                    ans.append(word)
+            elif word[0].lower() in rowS:
+                if all(x in rowS for x in word.lower()):
+                    ans.append(word)
+            elif word[0].lower() in rowT:
+                if all(x in rowT for x in word.lower()):
+                    ans.append(word)
+        return ans
