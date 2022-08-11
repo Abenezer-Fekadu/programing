@@ -18,6 +18,7 @@ class Solution:
                     
                 num = node.val
                 dfs(node.right)
-
+                
+            return
         dfs(root)
         return ans
