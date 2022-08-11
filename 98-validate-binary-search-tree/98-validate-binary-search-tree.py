@@ -14,7 +14,8 @@ class Solution:
                 dfs(node.left)
                 if num >= node.val:
                     ans = False
-
+                    return
+                    
                 num = node.val
                 dfs(node.right)
 
