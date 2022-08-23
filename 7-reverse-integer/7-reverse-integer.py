@@ -1,24 +1,16 @@
 class Solution:
     def reverse(self, x: int) -> int:
-        check = True
+        mul = 1
         if x < 0:
-            check = False
+            x *= -1
+            mul = -1
             
-        x = str(abs(x))
-        s = []
-        zero = True
-        for i in range(len(x)-1, -1, -1):
-            if x[i] != 0:
-                zero  = False
-            if not zero:
-                s.append(x[i])
-        
-        num = "".join(s)
-        
-        if check and int(num) <= 2**31-1:
-            return int(num)
-        elif not check and -1*int(num) >= -2**31:
-            return -1*int(num)
-        else:
+        rev = 0
+        while x > 0:
+            rev = rev * 10 + (x % 10)
+            x = x//10
+            
+        if rev < -2**31 or rev > 2**31-1:
             return 0
-            
+        
+        return rev * mul
