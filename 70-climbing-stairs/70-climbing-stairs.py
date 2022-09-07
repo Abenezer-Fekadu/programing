@@ -6,7 +6,7 @@ class Solution:
             if n in stairs:
                 return stairs[n]
             
-            stairs[n] = n if n <= 2 else calculate(n - 1) + calculate(n - 2)
+            stairs[n] = n if n <= 3 else calculate(n - 1) + calculate(n - 2)
             return stairs[n]
 
         return calculate(n)
