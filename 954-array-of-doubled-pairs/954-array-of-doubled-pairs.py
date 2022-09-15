@@ -1,19 +1,16 @@
 class Solution:
     def canReorderDoubled(self, arr: List[int]) -> bool:
-        count = defaultdict(int)
+        arr.sort(key=abs)
         
-        arr.sort()
-        
+        count = Counter(arr)
         for num in arr:
-            count[num] += 1
-            
-        for num in arr:
-            if count[num] > 0 and count[2*num] > 0:
+            if count[num] == 0:
+                continue
+                
+            if count.get(num * 2):
                 count[num] -= 1
-                count[2*num] -= 1        
-        
-        for v in count.values():
-            if v != 0:
+                count[num * 2] -= 1
+            else:
                 return False
-            
+        
         return True
