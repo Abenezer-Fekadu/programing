@@ -28,5 +28,6 @@ class Solution:
                 val = search(num)
                 
                 result[val] = num
+                
         return len(result)
                 
