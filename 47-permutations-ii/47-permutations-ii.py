@@ -1,6 +1,7 @@
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         ans = set()
+        
         def solve(idx, lst):
             if len(lst) == len(nums):
                 ans.add(tuple(lst))
@@ -17,14 +18,6 @@ class Solution:
                     idx.pop()
                 
             
-        perm = []
-        ind = []
-        for i in range(len(nums)):
-            perm.append(nums[i]) 
-            ind.append(i)
-            solve(ind, perm)    
-            perm.pop()
-            ind.pop()
-            
+        solve([], [])
         return ans
             
