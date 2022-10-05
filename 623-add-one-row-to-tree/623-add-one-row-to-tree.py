@@ -13,17 +13,12 @@ class Solution:
             if not node: return
             
             if d == depth - 1:
-                l = TreeNode(val)
-                r = TreeNode(val)
-                
-                node.left, l.left = l, node.left 
-                node.right, r.right = r, node.right
+                node.left = TreeNode(val, node.left)
+                node.right = TreeNode(val, None, node.right)
                 
             left = dfs(node.left, d+1)
             right = dfs(node.right, d+1)
-            
             return
-        
         
         dfs(root, 1)
         return root
