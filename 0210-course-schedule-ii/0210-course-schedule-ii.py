@@ -20,9 +20,6 @@ class Solution:
                 indegree[pre] -= 1
                 if indegree[pre] == 0:
                     queue.append(pre)
-          
-        for v in indegree.values():
-            if v != 0:
-                return []
+
             
-        return ans
+        return ans if len(ans) == numCourses else []
