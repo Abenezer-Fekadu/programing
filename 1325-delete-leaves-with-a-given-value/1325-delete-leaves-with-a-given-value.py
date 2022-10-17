@@ -9,19 +9,12 @@ class Solution:
         if not root:
             return None
         
-        left = self.removeLeafNodes(root.left, target)
-        right = self.removeLeafNodes(root.right, target)
+        root.left = self.removeLeafNodes(root.left, target)
+        root.right = self.removeLeafNodes(root.right, target)
         
-        if not left and not right and root.val == target:
-            root.left = None
-            root.right = None
-            
+        if not root.left and not root.right and root.val == target:
             return None
         
-        root.left = left
-        root.right = right
-            
-    
         return root
     
         
