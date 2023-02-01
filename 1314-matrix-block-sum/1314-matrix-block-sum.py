@@ -1,25 +1,26 @@
 class Solution:
     def matrixBlockSum(self, mat: List[List[int]], k: int) -> List[List[int]]:
-        row, col = len(mat), len(mat[0])
-        bound = lambda row, col: 0 <= row < len(mat)+1 and 0 <= col < len(mat[0])+1  
-        dp =  [[0] * (col + 1) for _ in range(row+1)]
+        r, c = len(mat), len(mat[0])
+        pref =  [[0] * (c + 1) for _ in range(r+1)]
         
-        for i in range(1, row+1):
-            for j in range(1, col+1):
-                dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + mat[i-1][j-1]
+        # pref_sum
+        for i in range(1, r+1):
+            for j in range(1, c+1):
+                pref[i][j] = pref[i-1][j] + pref[i][j-1] - pref[i-1][j-1] + mat[i-1][j-1]
                 
+        ans = [[0] * c for _ in range(r)]
+        for i in range(r):
+            for j in range(c):
+                row = [max(0, i-k), min(i+k, r-1)]
+                col = [max(0, j-k), min(j+k, c-1)]
+                
+                ans[i][j] = pref[row[1]+1][col[1]+1]
+                if col[0] > 0 and row[0] > 0:
+                    ans[i][j] += pref[row[0]][col[0]]
+                if row[0] > 0:
+                    ans[i][j] -= pref[row[0]][col[1]+1]
+                if col[0] > 0:
+                    ans[i][j] -= pref[row[1]+1][col[0]]
 
-        for i in range(row):
-            for j in range(col):
-                col1, col2 = max(0, j-k), min(j+k, col-1)
-                row1, row2 = max(0, i-k), min(i+k, row-1)
-                
-                topRight = dp[row1][col2+1] if row1 > 0 else 0
-                topLeft = dp[row1][col1] if (col1 > 0 and row1 > 0) else 0
-                
-                bottomLeft = dp[row2+1][col1] if col1 > 0 else 0
-                bottomRight = dp[row2+1][col2+1]
-                
-                mat[i][j] =  bottomRight + topLeft - bottomLeft - topRight 
-
-        return mat
+            
+        return ans
