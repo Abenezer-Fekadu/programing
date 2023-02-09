@@ -13,12 +13,12 @@ class Solution:
                 backtrack(i+1, address)         
                 address.pop()       
                 
-        
+    
             if address and (address[-1] != 0 and address[-1]*10 + int(s[i]) <= 255):
-                lastItem = address[-1]
-                address[-1] = lastItem*10+int(s[i])
+                last = address[-1]
+                address[-1] = last*10+int(s[i])
                 backtrack(i+1, address)                    
-                address[-1] = lastItem 
+                address[-1] = last
                 
         backtrack(0, [])
         return ans
